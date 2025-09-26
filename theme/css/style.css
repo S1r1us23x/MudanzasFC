@@ -715,7 +715,7 @@ ul.top-info li p.info-text {
   }
 }
 .header-one .logo-area {
-  padding: 30px 0;
+  padding: 10px 0;
 }
 
 .navbar-fixed {
@@ -755,7 +755,7 @@ ul.navbar-nav > li.active > a {
 /*-- Logo --*/
 .logo img {
   width: auto;
-  height: 35px;
+  height: 100px;
 }
 
 .header-two .logo img {
@@ -2404,6 +2404,7 @@ img.testimonial-thumb {
 /* Footer about us */
 .footer-logo {
   margin-bottom: 25px;
+  margin-left: 20%;
 }
 
 /* Footer social */
@@ -3378,3 +3379,7 @@ label {
   font-weight: 700;
 }
 /*# sourceMappingURL=style.css.map */
+
+.developer-link:hover {
+    color: white;
+}

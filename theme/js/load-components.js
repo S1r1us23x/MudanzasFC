@@ -26,7 +26,35 @@ document.addEventListener('DOMContentLoaded', () => {
         y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
     })(window, document, "clarity", "script", "tfznf8li8f");
 
+    // Observador para detectar cuando el menú está cargado y luego resaltar el enlace activo
+    const headerContainer = document.getElementById('header-container');
+    const observer = new MutationObserver(function(mutations, obs) {
+        const navLinks = document.querySelectorAll('#navbar-collapse .nav-link');
+        if (navLinks.length > 0) {
+        const currentPage = window.location.pathname.split("/").pop();
+        
+        navLinks.forEach(link => {
+            // Elimina la clase 'active' de cualquier elemento que la tenga
+            if (link.parentElement.classList.contains('active')) {
+                link.parentElement.classList.remove('active');
+            }
+            // Añade la clase 'active' al enlace de la página actual
+            if (link.getAttribute('href') === currentPage) {
+                link.parentElement.classList.add('active');
+            }
+        });
+        obs.disconnect(); // Detiene la observación una vez que el menú está listo
+        }
+    });
+    
+    observer.observe(headerContainer, {
+        childList: true,
+        subtree: true
+    });
+
+
     loadComponent('header-container', '_header.html');
     loadComponent('social-networks-container', '_socialBar.html');
     loadComponent('footer-container', '_footer.html');
+    loadComponent('meta-container', '_meta.html');
 });
