@@ -1,124 +1,86 @@
-# Constra - Free bootstrap construction template
+# Mudanzas FC - Sitio Web Oficial
 
-Constra is a theme for professional builders, construction or even industrial production companies with a focus on presenting the team, current and recent projects. Responsive development of the layouts makes the theme look good on any modern device.
+Este es el repositorio del código fuente para el sitio web oficial de Mudanzas FC, una empresa de mudanzas profesional que ofrece servicios a nivel local y nacional en Colombia.
 
-<!-- demo -->
-## Example Site
+## Páginas
 
-| [![](screenshots/homepage-1.png)](https://demo.themefisher.com/constra/) | [![](screenshots/homepage-2.png)](https://demo.themefisher.com/constra/index-2.html) | [![](screenshots/about.png)](https://demo.themefisher.com/constra/about.html) |
-|:---:|:---:|:---:|
-| **Homepage 1**  | **Homepage 2**  | **About**  |
-| [![](screenshots/service.png)](https://demo.themefisher.com/constra/services.html) | [![](screenshots/project.png)](https://demo.themefisher.com/constra/projects.html) | [![](screenshots/news.png)](https://demo.themefisher.com/constra/news-right-sidebar.html) |
-| **Service** | **Project** | **News** |
-
-👉🏻[View Live Preview](https://demo.themefisher.com/constra/)
-
-<!-- resources -->
-## Pages
-
-* **Homepage 1**
-* **Homepage 2**
-* **About**
-* **Services**
-* **Service Details**
-* **Projects**
-* **Projects Details**
-* **Pricing**
-* **Team**
-* **Testimonials**
-* **News Left Sidebar**
-* **News Right Sidebar**
-* **News Details**
-* **FAQ**
-* **404**
-* **Typography**
-* **Contact**
+*   **Inicio**
+*   **Servicios**
+    *   Mudanzas Residenciales
+    *   Mudanzas Corporativas
+    *   Servicios Integrales
+*   **Nosotros**
+*   **Preguntas Frecuentes**
+*   **Contacto**
+*   **Cotizaciones**
 
 <!-- download -->
-## Download And installation
+## Instalación y Uso
 
-Download this template from [Github](https://github.com/themefisher/constra/archive/main.zip)
+### Uso Básico
 
-<!-- installation -->
-### Basic Usages
+Después de descargar el proyecto, puedes editar los archivos HTML y CSS directamente desde la carpeta `theme`. Para previsualizar los cambios, simplemente abre el archivo `index.html` en tu navegador web.
 
-After downloading the template, you can simply edit the HTML and CSS files from the `theme` folder. To preview the changes you make to the code, you can open the index.html file in your web browser.
+### Uso Avanzado
 
-### Advanced Usage
+Para un uso avanzado, necesitas tener algunos prerrequisitos instalados. Luego, puedes ejecutar el proyecto en tu servidor local. Revisa el archivo `package.json` para ver los scripts incluidos.
 
-For advanced usage, you have some prerequisites to install. Then you can run it on your localhost. You can view the package.json file to see which scripts are included.
+#### Prerrequisitos
 
-#### Install prerequisites (once for a machine)
-
-* **Node Installation:** [Install node js](https://nodejs.org/en/download/)
-* **Gulp Installation:** Install gulp globally from your terminal
+*   **Instalación de Node.js:** [Instalar Node.js](https://nodejs.org/en/download/)
+*   **Instalación de Gulp:** Instala Gulp globalmente desde tu terminal.
 
 ```
 npm install --global gulp-cli
 ```
 
-Or visit the original [Gulp docs](https://gulpjs.com/docs/en/getting-started/quick-start)
+#### Configuración Local
 
-#### Local setup
+Después de instalar las dependencias, abre el proyecto con tu editor de código preferido (se recomienda [VS Code](https://code.visualstudio.com/)) y abre la terminal integrada.
 
-After successfully installing those dependencies, open this theme with any IDE [[VS Code](https://code.visualstudio.com/) recommended], and then open the internal terminal of IDM [vs code shortcut <code>ctrl/cmd+\`</code>]
-
-* Install dependencies
+*   Instalar dependencias del proyecto:
 
 ```
 npm install
 ```
 
-* Run locally
+*   Ejecutar localmente:
 
 ```
 npm run dev
 ```
 
-After that, it will open up a preview of the template in your default browser, watch for changes to source files, and live reload the browser when changes are saved.
+Esto abrirá una vista previa del sitio en tu navegador por defecto y se recargará automáticamente cada vez que guardes un cambio en los archivos fuente.
 
-#### Production Build
+#### Compilación para Producción
 
-After finishing all the customization, you can create a production build by running this command.
+Cuando hayas finalizado la personalización, puedes crear una compilación para producción ejecutando este comando:
 
 ```
 npm run build
 ```
 
-Now you get a `theme` folder that has all the changes you have made. you can use this folder as your main theme.
-
-👉🏻 [visit documentation](https://docs.themefisher.com/constra/)
-
-<!-- reporting issue -->
-## Reporting Issues
-
-We use GitHub Issues as the official bug tracker for the Constra Template. Please Search [existing issues](https://github.com/themefisher/Constra-Bootstrap-Construction-Template/issues). It’s possible someone has already reported the same problem.
-If your problem or idea has not been addressed yet, feel free to [open a new issue](https://github.com/themefisher/Constra-Bootstrap-Construction-Template/issues).
-
-<!-- support -->
-## Technical Support or Questions (Paid)
-
-If you have questions or need help integrating the product please [contact us](mailto:mehedi@themefisher.com) instead of opening an issue.
+Esto generará la carpeta `theme` con todos los archivos optimizados y listos para ser desplegados en un servidor.
 
 <!-- licence -->
-## License
+## Licencia
 
-Copyright (c) 2016 - Present, Designed & Developed by [Themefisher](https://themefisher.com)
+Copyright (c) 2024 - Presente, Desarrollado por [ikhodi consultores](https://Ikhodic.com) para Mudanzas FC.
 
-**Code License:** Released under the [MIT](https://github.com/themefisher/constra/blob/main/LICENSE) license.
+**Licencia del Código:** Publicado bajo la licencia [MIT](https://github.com/themefisher/constra/blob/main/LICENSE).
 
-**Image license:** The images are only for demonstration purposes. They have their license, we don't have permission to share those images.
+**Licencia de Imágenes:** Las imágenes utilizadas son solo para fines de demostración y tienen sus propias licencias.
 
 <!-- resources -->
-## Resources
+## Recursos
 
-Some third-party plugins that we used to build this template. Please check their licenses.
+Algunos de los plugins de terceros que se utilizaron para construir este sitio:
 
-* **Bootstrap v4.5**: <https://getbootstrap.com/docs/4.5/getting-started/introduction/>
-* **Jquery v3.5.1**: <https://jquery.com/download/>
-* **Google Fonts**: <http://fonts.google.com/>
-* **Font Awesome Free**: <https://fontawesome.com/>
-* **Animate CSS**: <https://animate.style/>
-* **Colorbox**: <https://www.jacklmoore.com/colorbox/>
-* **Slick**: <https://kenwheeler.github.io/slick/>
-* **Shuffle**: <https://vestride.github.io/Shuffle/>
+*   **Bootstrap v4.5**: <https://getbootstrap.com/docs/4.5/getting-started/introduction/>
+*   **Jquery v3.5.1**: <https://jquery.com/download/>
+*   **Google Fonts**: <http://fonts.google.com/>
+*   **Font Awesome Free**: <https://fontawesome.com/>
+*   **Animate CSS**: <https://animate.style/>
+*   **Colorbox**: <https://www.jacklmoore.com/colorbox/>
+*   **Slick**: <https://kenwheeler.github.io/slick/>
+*   **Shuffle**: <https://vestride.github.io/Shuffle/>
