@@ -1,0 +1,13 @@
+BEGIN:VCARD
+VERSION:3.0
+N:Cañon;Fabian;;;
+FN:Fabian Cañon
+ORG:Mudanzas FC
+TITLE:CEO
+TEL;TYPE=CELL:+573124092711
+URL:http://www.mudanzasfc.com
+ADR;TYPE=WORK:;;Calle 129 #91b-33;Bogotá;;;Colombia
+PHOTO;TYPE=JPEG:https://s1r1us23x.github.io/MudanzasFC/theme/images/services/service-center.jpg
+EMAIL;TYPE=INTERNET:fabian.canon@mudanzasfc.com
+EMAIL;TYPE=INTERNET:fabiancanon26@gmail.com
+END:VCARD
