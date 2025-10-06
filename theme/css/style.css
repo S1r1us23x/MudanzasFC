@@ -3383,3 +3383,13 @@ label {
 .developer-link:hover {
     color: white;
 }
+
+/* quoute style */
+.imgQuote {
+    color: #ffb600;
+}
+
+.btn-primary:hover {
+  background: #272d33;
+  color: #ffb600 !important;
+}
