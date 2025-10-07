@@ -24,6 +24,26 @@ $(document).ready(function() {
             handleContactForm();
         });
 
+        // Mostrar/ocultar campo de cantidad de auxiliares
+        $('#checkAuxiliares').on('change', function() {
+            if ($(this).is(':checked')) {
+                $('#cantidadAuxiliaresContainer').show();
+            } else {
+                $('#cantidadAuxiliaresContainer').hide();
+                $('#cantidadAuxiliares').val(1); // Reset a 1 cuando se desmarca
+            }
+        });
+
+        // Mostrar/ocultar campo de cantidad de TV
+        $('#checkTV').on('change', function() {
+            if ($(this).is(':checked')) {
+                $('#cantidadTVContainer').show();
+            } else {
+                $('#cantidadTVContainer').hide();
+                $('#cantidadTV').val(1); // Reset a 1 cuando se desmarca
+            }
+        });
+
         // Cambios en el formulario para cálculo automático (opcional)
         $('#cotizacionForm').on('change', 'input, select', function() {
             // Puedes habilitar cálculo automático descomentando la siguiente línea
@@ -142,9 +162,21 @@ $(document).ready(function() {
         formData.embalaje = $('input[name="embalaje"]:checked').val();
         formData.serviciosExtra = [];
         $('input[name="serviciosExtra"]:checked').each(function() {
+            const tipo = $(this).val();
+            let costo = parseInt($(this).data('cost')) || 0;
+
+            // Lógica especial para auxiliares
+            if (tipo === 'auxiliares') {
+                const cantidad = parseInt($('#cantidadAuxiliares').val()) || 1;
+                costo *= cantidad;
+            } else if (tipo === 'TV') {
+                const cantidad = parseInt($('#cantidadTV').val()) || 1;
+                costo *= cantidad;
+            }
+
             formData.serviciosExtra.push({
-                tipo: $(this).val(),
-                costo: parseInt($(this).data('cost')) || 0
+                tipo: tipo,
+                costo: costo
             });
         });
         
@@ -314,23 +346,66 @@ $(document).ready(function() {
 
     function enviarWhatsApp(resultado) {
         const data = cotizacionData;
-        const mensaje = `¡Hola! Me interesa el servicio de mudanza. Aquí están mis datos:
 
-📋 INFORMACIÓN:
-• Nombre: ${data.nombre}
-• Teléfono: ${data.telefono}
-• De: ${data.ciudadOrigen}
-• A: ${data.ciudadDestino}
-• Tipo: ${$(`select[name="tipoMudanza"] option[value="${data.tipoMudanza}"]`).text()}
+        // --- Funciones auxiliares para generar el texto ---
+        const getLabel = (selector) => $(selector).length ? $(selector).text().trim() : 'No especificado';
+        
+        const getBienesEspeciales = () => {
+            if (data.bienesEspeciales && data.bienesEspeciales.length > 0) {
+                return data.bienesEspeciales.map(bien => 
+                    getLabel(`input[name="bienesEspeciales"][value="${bien.tipo}"] + label`)
+                ).join('\n• ');
+            }
+            return 'No se seleccionaron bienes especiales.';
+        };
 
-🏠 DETALLES:
-• Habitaciones: ${$(`select[name="habitaciones"] option[value="${data.habitaciones}"]`).text()}
-• Embalaje: ${$(`input[name="embalaje"][value="${data.embalaje}"]`).next('label').text()}
-• Urgencia: ${$(`select[name="urgencia"] option[value="${data.urgencia}"]`).text()}
+        const getServiciosExtra = () => {
+            if (data.serviciosExtra && data.serviciosExtra.length > 0) {
+                return data.serviciosExtra.map(servicio => {
+                    let textoServicio = getLabel(`input[name="serviciosExtra"][value="${servicio.tipo}"] + label`);
+                    if (servicio.tipo === 'auxiliares') {
+                        const cantidad = $('#cantidadAuxiliares').val();
+                        textoServicio = `Auxiliares extra (Cantidad: ${cantidad})`;
+                    } else if (servicio.tipo === 'TV') {
+                        const cantidad = $('#cantidadTV').val();
+                        textoServicio = `Desistalar / Instalar TV (Cantidad: ${cantidad})`;
+                    }
+                    return textoServicio;
+                }).join('\n• ');
+            }
+            return 'No requiere servicios extra.';
+        };
 
-💰 COTIZACIÓN ESTIMADA: $${formatCurrency(resultado.total)} COP
+        // --- Construcción del mensaje ---
+        const mensaje = `¡Hola MudanzasFc! Me interesa el servicio con ustedes. Aquí está el resumen de mi cotización:
 
-¿Pueden confirmar disponibilidad y programar una visita técnica?`;
+*📋 INFORMACIÓN BÁSICA*
+• *Nombre:* ${data.nombre || 'No especificado'}
+• *Teléfono:* ${data.telefono || 'No especificado'}
+• *Desde:* ${data.ciudadOrigen || 'No especificado'}
+• *Hasta:* ${data.ciudadDestino || 'No especificado'}
+• *Tipo de Mudanza:* ${getLabel(`select[name="tipoMudanza"] option[value="${data.tipoMudanza}"]`)}
+
+*🏠 DETALLES DEL VOLUMEN*
+• *Habitaciones:* ${getLabel(`select[name="habitaciones"] option[value="${data.habitaciones}"]`)}
+• *Metros Cúbicos (m³):* ${getLabel(`select[name="metrosCubicos"] option[value="${data.metrosCubicos}"]`)}
+• *Bienes Especiales:*
+        -${getBienesEspeciales()}
+
+*🛠️ SERVICIOS ADICIONALES*
+• *Embalaje:* ${getLabel(`input[name="embalaje"][value="${data.embalaje}"] + label`)}
+• *Servicios Extra:*
+${getServiciosExtra()}
+
+*🚚 COMPLEJIDAD Y SEGURO*
+• *Acceso en Origen:* ${getLabel(`select[name="accesoOrigen"] option[value="${data.accesoOrigen}"]`)}
+• *Acceso en Destino:* ${getLabel(`select[name="accesoDestino"] option[value="${data.accesoDestino}"]`)}
+• *Urgencia:* ${getLabel(`select[name="urgencia"] option[value="${data.urgencia}"]`)}
+• *Seguro:* ${getLabel(`select[name="seguro"] option[value="${data.seguro}"]`)}
+
+*💰 COTIZACIÓN ESTIMADA: $${formatCurrency(resultado.total)} COP*
+
+¿Pueden confirmar disponibilidad y los siguientes pasos? Gracias.`;
 
         const whatsappUrl = `https://wa.me/+573124092711?text=${encodeURIComponent(mensaje)}`;
         window.open(whatsappUrl, '_blank');

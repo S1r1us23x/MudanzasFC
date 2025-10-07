@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
+<head>
     <!-- Basic Page Needs
     ================================================== -->
     <meta charset="utf-8">
@@ -22,7 +22,7 @@
     <link rel="icon" type="image/png" href="images/favicon.ico">
 
     <!-- CSS
-  ================================================== -->
+    ================================================== -->
     <!-- Bootstrap -->
     <link rel="stylesheet" href="plugins/bootstrap/bootstrap.min.css">
     <!-- FontAwesome -->
@@ -37,349 +37,407 @@
     <!-- Template styles-->
     <link rel="stylesheet" href="css/style.css">
 
-  </head>
+    <script src="https://www.google.com/recaptcha/enterprise.js?render=6LfaPuErAAAAANTjR_shWort5WXuJgEys9mm8XPw"></script>
+    
+    <!-- Google Maps Autocomplete Script -->
+    <script>
+        function initAutocomplete() {
+            const options = {
+                componentRestrictions: { country: "co" }, // Restringe la búsqueda a Colombia
+                fields: ["address_components", "geometry", "name"],
+                types: ["address"],
+            };
+
+            const origenInput = document.getElementById('ciudadOrigen');
+            const destinoInput = document.getElementById('ciudadDestino');
+
+            if (origenInput && destinoInput) {
+                new google.maps.places.Autocomplete(origenInput, options);
+                new google.maps.places.Autocomplete(destinoInput, options);
+            }
+        }
+    </script>
+    <!-- Google Maps Places API -->
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDh2RVp-A3ONHv6uLesQv9Y26DMAl1tvSk&libraries=places&callback=initAutocomplete"></script>
+
+</head>
 <body>
-    <body>
     <div class="body-inner">
-      <!-- Header start -->
-      <div id="header-container"></div>
+        <!-- Header start -->
+        <div id="header-container"></div>
 
-      <div id="banner-area" class="banner-area" style="background-image:url(images/banner/banner4.jpg); background-position: 10% 40%;">
-      <div class="banner-text">
-        <div class="container">
-            <div class="row">
-              <div class="col-lg-12">
-                  <div class="banner-heading">
-                    <h1 class="banner-title">Cotiza con Confianza</h1>
-                    <p>Obtén una cotización personalizada y confiable para tus necesidades de mudanzas.</p>
-                  </div>
-              </div><!-- Col end -->
-            </div><!-- Row end -->
-        </div><!-- Container end -->
-      </div><!-- Banner text end -->
-    </div><!-- Banner area end --> 
-
-      <!-- Cotización Section -->
-      <section id="cotizacion" class="py-5">
-          <div class="container">
-              <div class="row">
-                  <div class="col-lg-12">
-                      <div class="section-header text-center mb-5">
-                          <h2 class="display-5 fw-bold">Simulador de Cotización</h2>
-                          <p class="lead text-muted">Obtén tu presupuesto personalizado en segundos</p>
-                      </div>
-                  </div>
-              </div>
-              
-              <div class="row">
-                  <div class="col-lg-8">
-                      <div class="card shadow-lg border-0">
-                          <div class="card-body p-4">
-                              <h4 class="mb-4 text-center"><i class="fas fa-calculator me-2 imgQuote"></i> Calculamos tu mudanza</h4>
-                              <form id="cotizacionForm">
-                                  <!-- Información Básica -->
-                                  <div class="form-group mb-4">
-                                      <h5 class="mb-3"><i class="fas fa-info-circle me-2 imgQuote"></i> Información Básica</h5>
-                                      <div class="row">
-                                          <div class="col-md-6 mb-3">
-                                              <label class="form-label fw-semibold">Nombre Completo <span class="text-danger">*</span></label>
-                                              <input type="text" class="form-control" name="nombre" required>
-                                          </div>
-                                          <div class="col-md-6 mb-3">
-                                              <label class="form-label fw-semibold">Teléfono <span class="text-danger">*</span></label>
-                                              <input type="tel" class="form-control" name="telefono" required pattern="[0-9\s+]{10,}" title="Ingresa un número de teléfono válido de al menos 10 dígitos.">
-                                              <div class="invalid-feedback">Por favor, ingresa un número de teléfono válido.</div>
-                                          </div>
-                                      </div>
-                                      <div class="row">
-                                          <div class="col-md-6 mb-3">
-                                              <label class="form-label fw-semibold">Dirección Origen <span class="text-danger">*</span></label>
-                                              <input type="text" class="form-control" name="ciudadOrigen" required>
-                                          </div>
-                                          <div class="col-md-6 mb-3">
-                                              <label class="form-label fw-semibold">Dirección Destino <span class="text-danger">*</span></label>
-                                              <input type="text" class="form-control" name="ciudadDestino" required>
-                                          </div>
-                                      </div>
-                                      <div class="row">
-                                        <div class="col-md-6 mb-3">
-                                            <label class="form-label fw-semibold">Tipo de Mudanza <span class="text-danger">*</span></label>
-                                            <select class="form-select" name="tipoMudanza" required>
-                                                <option value="">Selecciona el tipo</option>
-                                                <option value="local" data-factor="1">Local - Misma ciudad</option>
-                                                <option value="regional" data-factor="1.5">Regional - Entre ciudades cercanas</option>
-                                                <option value="nacionalExpress" data-factor="2">Nacional (expreso) </option>
-                                                <option value="nacionalCompartido" data-factor="1.5">Nacional (compartido) </option>
-                                            </select>
-                                        </div>
-                                      </div>
-                                  </div>
-
-                                  <hr class="my-4">
-
-                                  <!-- Volumen de Bienes -->
-                                  <div class="mb-4">
-                                      <h5 class="mb-3"><i class="fas fa-home me-2 imgQuote" ></i> Volumen de Bienes</h5>
-                                      <div class="row">
-                                          <div class="col-md-6 mb-3">
-                                              <label class="form-label fw-semibold">Número de Habitaciones <span class="text-danger">*</span></label>
-                                              <select class="form-select" name="habitaciones" required>
-                                                  <option value="">Selecciona</option>
-                                                  <option value="1-2" data-factor="1" data-base="200000">1-2 Habitaciones (Pequeña)</option>
-                                                  <option value="3-4" data-factor="1.8" data-base="300000">3-4 Habitaciones (Mediana)</option>
-                                                  <option value="5+" data-factor="2.5" data-base="350000">5+ Habitaciones (Grande)</option>
-                                              </select>
-                                          </div>
-                                          <div class="col-md-6 mb-3">
-                                              <label class="form-label fw-semibold">Metros Cúbicos Estimados</label>
-                                              <select class="form-select" name="metrosCubicos">
-                                                  <option value="0">No lo sé</option>
-                                                  <option value="5-15" data-factor="1">5-15 m³</option>
-                                                  <option value="15-30" data-factor="1.3">15-30 m³</option>
-                                                  <option value="30-50" data-factor="1.6">30-50 m³</option>
-                                                  <option value="50+" data-factor="2">Más de 50 m³</option>
-                                              </select>
-                                          </div>
-                                      </div>
-                                      <div class="mb-3">
-                                          <h6 class="fw-semibold mb-3">¿Tienes bienes especiales?</h6>
-                                          <div class="row">
-                                              <div class="col-md-4">
-                                                  <div class="form-check">
-                                                      <input class="form-check-input" type="checkbox" name="bienesEspeciales" value="piano" data-cost="80000">
-                                                      <label class="form-check-label">Piano - multifuerzas</label>
-                                                  </div>
-                                              </div>
-                                              <div class="col-md-4">
-                                                  <div class="form-check">
-                                                      <input class="form-check-input" type="checkbox" name="bienesEspeciales" value="obras" data-cost="50000">
-                                                      <label class="form-check-label">Articulos de delicados - Obras </label>
-                                                  </div>
-                                              </div>
-                                              <div class="col-md-4">
-                                                  <div class="form-check">
-                                                      <input class="form-check-input" type="checkbox" name="bienesEspeciales" value="electrodomesticos" data-cost="30000">
-                                                      <label class="form-check-label">Electrodomésticos grandes</label>
-                                                  </div>
-                                              </div>
-                                          </div>
-                                      </div>
-                                  </div>
-
-                                  <hr class="my-4">
-
-                                  <!-- Servicios Adicionales -->
-                                  <div class="mb-4">
-                                      <h5 class="mb-3"><i class="fas fa-plus-circle me-2 imgQuote"></i> Servicios Adicionales</h5>
-                                      <div class="row">
-                                          <div class="col-md-6">
-                                              <h6 class="fw-semibold mb-3">Embalaje</h6>
-                                              <div class="form-check mb-2">
-                                                  <input class="form-check-input" type="radio" name="embalaje" value="basico" data-cost="0" checked>
-                                                  <label class="form-check-label">Básico (incluido)</label>
-                                              </div>
-                                              <div class="form-check mb-2">
-                                                  <input class="form-check-input" type="radio" name="embalaje" value="premium" data-cost="150000">
-                                                  <label class="form-check-label">Premium (+$150.000)</label>
-                                              </div>
-                                              <div class="form-check mb-2">
-                                                  <input class="form-check-input" type="radio" name="embalaje" value="delicados" data-cost="200000">
-                                                  <label class="form-check-label">Artículos delicados (+$200.000)</label>
-                                              </div>
-                                          </div>
-                                          <div class="col-md-6">
-                                              <h6 class="fw-semibold mb-3">Servicios Extra</h6>
-                                              <div class="form-check mb-2">
-                                                  <input class="form-check-input" type="checkbox" name="serviciosExtra" value="desmontaje" data-cost="100000">
-                                                  <label class="form-check-label">Desmontaje/Montaje (+$100.000)</label>
-                                              </div>
-                                              <div class="form-check mb-2">
-                                                  <input class="form-check-input" type="checkbox" name="serviciosExtra" value="auxiliares" data-cost="80000">
-                                                  <label class="form-check-label">Auxiliares extra (+$80.000)</label>
-                                              </div>
-                                              <div class="form-check mb-2">
-                                                  <input class="form-check-input" type="checkbox" name="serviciosExtra" value="almacenamiento" data-cost="120000">
-                                                  <label class="form-check-label">Almacenamiento temporal (+$120.000)</label>
-                                              </div>
-                                          </div>
-                                  </div>
-                                  </div>
-
-                                  <hr class="my-4">
-
-                                  <!-- Complejidad y Urgencia -->
-                                  <div class="mb-4">
-                                      <h5 class="mb-3"><i class="fas fa-cogs me-2 imgQuote"></i> Complejidad y Urgencia</h5>
-                                      <div class="row">
-                                          <div class="col-md-6 mb-3">
-                                              <label class="form-label fw-semibold">Accesibilidad Origen</label>
-                                              <select class="form-select" name="accesoOrigen">
-                                                  <option value="facil" data-factor="1">Fácil acceso - Con ascensor</option>
-                                                  <option value="medio" data-factor="1.2">Acceso medio - Escaleras 1-3 pisos</option>
-                                                  <option value="dificil" data-factor="1.4">Difícil acceso - Escaleras 4+ pisos</option>
-                                              </select>
-                                          </div>
-                                          <div class="col-md-6 mb-3">
-                                              <label class="form-label fw-semibold">Accesibilidad Destino</label>
-                                              <select class="form-select" name="accesoDestino">
-                                                  <option value="facil" data-factor="1">Fácil acceso - Con ascensor</option>
-                                                  <option value="medio" data-factor="1.2">Acceso medio - Escaleras 1-3 pisos</option>
-                                                  <option value="dificil" data-factor="1.4">Difícil acceso - Escaleras 4+ pisos</option>
-                                              </select>
-                                          </div>
-                                      </div>
-                                      <div class="row">
-                                          <div class="col-md-6 mb-3">
-                                              <label class="form-label fw-semibold">Urgencia del Servicio</label>
-                                              <select class="form-select" name="urgencia">
-                                                  <option value="programada" data-factor="1">Programada (7+ días)</option>
-                                                  <option value="normal" data-factor="1.1">Normal (3-7 días)</option>
-                                                  <option value="express" data-factor="1.3">Express (1-2 días)</option>
-                                                  <option value="inmediata" data-factor="1.5">Inmediata (hoy)</option>
-                                              </select>
-                                          </div>
-                                          <div class="col-md-6 mb-3">
-                                              <label class="form-label fw-semibold">Seguro</label>
-                                              <select class="form-select" name="seguro">
-                                                  <option value="basico" data-cost="0">Básico (incluido)</option>
-                                                  <option value="premium" data-cost="80000">Premium (+$80.000)</option>
-                                                  <option value="completo" data-cost="150000">Cobertura completa (+$150.000)</option>
-                                              </select>
-                                          </div>
-                                  </div>
-                                  </div>
-
-                                  
-                                  <!-- Botón de Cálculo -->
-                                  <div class="text-center mt-4">
-                                      <button type="button" class="btn btn-primary" style="color: black;" id="calcular">
-                                          <i class="fas fa-calculator me-2"></i> Calcular Cotización
-                                      </button>
-                                  </div>
-                              </form>
-                          </div>
-                      </div>
-                  </div>
-
-                  <!-- Resultado Panel -->
-                  <div class="col-lg-4">
-                    <div class="card shadow-lg border-0 sticky-top" id="resultadoPanel" style="top: 100px;">
-                        <div class="card-header text-white" style="background-color: black;">
-                            <h4 class="mb-0" style="color: white;"><i class="fas fa-file-invoice-dollar me-2 imgQuote"></i> Tu Cotización</h4>
+        <div id="banner-area" class="banner-area" style="background-image:url(images/banner/banner4.jpg); background-position: 10% 40%;">
+            <div class="banner-text">
+                <div class="container">
+                    <div class="row">
+                    <div class="col-lg-12">
+                        <div class="banner-heading">
+                            <h1 class="banner-title">Cotiza con Confianza</h1>
+                            <p>Obtén una cotización personalizada y confiable para tus necesidades de mudanzas.</p>
                         </div>
-                        <div class="card-body" id="cotizacionResultado">
-                            <div class="text-center py-4">
-                                <i class="fas fa-calculator fa-3x text-muted mb-3"></i>
-                                <p class="text-muted">Completa el formulario y haz clic en "Calcular Cotización" para obtener tu presupuesto personalizado</p>
+                    </div><!-- Col end -->
+                    </div><!-- Row end -->
+                </div><!-- Container end -->
+            </div><!-- Banner text end -->
+        </div><!-- Banner area end --> 
+
+        <!-- Cotización Section -->
+        <section id="cotizacion" class="py-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="section-header text-center mb-5">
+                            <h2 class="display-5 fw-bold">Simulador de Cotización</h2>
+                            <p class="lead text-muted">Obtén tu presupuesto personalizado en segundos</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-lg-8">
+                        <div class="card shadow-lg border-0">
+                            <div class="card-body p-4">
+                                <h4 class="mb-4 text-center"><i class="fas fa-calculator me-2 imgQuote"></i> Calculamos tu mudanza</h4>
+                                <form id="cotizacionForm">
+                                    <!-- reCAPTCHA hidden input -->
+                                    <input type="hidden" id="recaptchaResponse" name="recaptcha-response">
+                                    <!-- Información Básica -->
+                                    <div class="form-group mb-4">
+                                        <h5 class="mb-3"><i class="fas fa-info-circle me-2 imgQuote"></i> Información Básica</h5>
+                                        <div class="row">
+                                            <div class="col-md-6 mb-3">
+                                                <label class="form-label fw-semibold">Nombre Completo <span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" name="nombre" required>
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <label class="form-label fw-semibold">Teléfono <span class="text-danger">*</span></label>
+                                                <input type="tel" class="form-control" name="telefono" required pattern="[0-9\s+]{10,}" title="Ingresa un número de teléfono válido de al menos 10 dígitos.">
+                                                <div class="invalid-feedback">Por favor, ingresa un número de teléfono válido.</div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6 mb-3">
+                                                <label class="form-label fw-semibold">Dirección Origen <span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" id="ciudadOrigen" name="ciudadOrigen" required>
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <label class="form-label fw-semibold">Dirección Destino <span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" id="ciudadDestino" name="ciudadDestino" required>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6 mb-3">
+                                                <label class="form-label fw-semibold">Tipo de Mudanza <span class="text-danger">*</span></label>
+                                                <select class="form-select" name="tipoMudanza" required>
+                                                    <option value="">Selecciona el tipo</option>
+                                                    <option value="local" data-factor="1">Local - Misma ciudad</option>
+                                                    <option value="regional" data-factor="1.5">Regional - Entre ciudades cercanas</option>
+                                                    <option value="nacionalExpress" data-factor="2">Nacional (expreso) </option>
+                                                    <option value="nacionalCompartido" data-factor="1.5">Nacional (compartido) </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <hr class="my-4">
+
+                                    <!-- Volumen de Bienes -->
+                                    <div class="mb-4">
+                                        <h5 class="mb-3"><i class="fas fa-home me-2 imgQuote" ></i> Volumen de Bienes</h5>
+                                        <div class="row">
+                                            <div class="col-md-6 mb-3">
+                                                <label class="form-label fw-semibold">Número de Habitaciones <span class="text-danger">*</span></label>
+                                                <select class="form-select" name="habitaciones" required>
+                                                    <option value="">Selecciona</option>
+                                                    <option value="1-2" data-factor="1" data-base="250000">1-2 Habitaciones (Pequeña)</option>
+                                                    <option value="3-4" data-factor="1.8" data-base="350000">3-4 Habitaciones (Mediana)</option>
+                                                    <option value="5+" data-factor="2.5" data-base="450000">5+ Habitaciones (Grande)</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <label class="form-label fw-semibold">Metros Cúbicos Estimados</label>
+                                                <select class="form-select" name="metrosCubicos">
+                                                    <option value="0">No lo sé</option>
+                                                    <option value="5-15" data-factor="1">5-15 m³</option>
+                                                    <option value="15-30" data-factor="1.3">15-30 m³</option>
+                                                    <option value="30-50" data-factor="1.6">30-50 m³</option>
+                                                    <option value="50+" data-factor="2">Más de 50 m³</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="mb-3">
+                                            <h6 class="fw-semibold mb-3">¿Tienes bienes especiales?</h6>
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" name="bienesEspeciales" value="piano" data-cost="80000">
+                                                        <label class="form-check-label">Piano - multifuerzas</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" name="bienesEspeciales" value="obras" data-cost="50000">
+                                                        <label class="form-check-label">Articulos de delicados - Obras </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" name="bienesEspeciales" value="electrodomesticos" data-cost="30000">
+                                                        <label class="form-check-label">Electrodomésticos grandes</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <hr class="my-4">
+
+                                    <!-- Servicios Adicionales -->
+                                    <div class="mb-4">
+                                        <h5 class="mb-3"><i class="fas fa-plus-circle me-2 imgQuote"></i> Servicios Adicionales</h5>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <h6 class="fw-semibold mb-3">Embalaje</h6>
+                                                <div class="form-check mb-2">
+                                                    <input class="form-check-input" type="radio" name="embalaje" value="basico" data-cost="0" checked>
+                                                    <label class="form-check-label">Básico (incluido)</label>
+                                                </div>
+                                                <div class="form-check mb-2">
+                                                    <input class="form-check-input" type="radio" name="embalaje" value="premium" data-cost="150000">
+                                                    <label class="form-check-label">Premium (+$150.000)</label>
+                                                </div>
+                                                <div class="form-check mb-2">
+                                                    <input class="form-check-input" type="radio" name="embalaje" value="delicados" data-cost="200000">
+                                                    <label class="form-check-label">Artículos delicados (+$200.000)</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <h6 class="fw-semibold mb-3">Servicios Extra</h6>
+                                                <div class="form-check mb-2">
+                                                    <input class="form-check-input" type="checkbox" name="serviciosExtra" value="desmontaje" data-cost="100000">
+                                                    <label class="form-check-label">Desmontaje/Montaje (+$100.000)</label>
+                                                </div>
+                                                <div class="form-check mb-2 d-flex align-items-center flex-wrap">
+                                                    <input class="form-check-input" type="checkbox" name="serviciosExtra" value="auxiliares" id="checkAuxiliares" data-cost="70000">
+                                                    <label class="form-check-label me-2" for="checkAuxiliares">Auxiliares extra (+$70.000 c/u)</label>
+                                                    <div id="cantidadAuxiliaresContainer" style="display: none;">
+                                                        <input type="number" class="form-control form-control-sm" id="cantidadAuxiliares" name="cantidadAuxiliares" value="1" min="1" style="width: 75px; height: 30px; margin-left: 10px;">
+                                                    </div>
+                                                </div>
+                                                <div class="form-check mb-2">
+                                                    <input class="form-check-input" type="checkbox" name="serviciosExtra" value="almacenamiento" data-cost="120000">
+                                                    <label class="form-check-label">Almacenamiento temporal (+$120.000)</label>
+                                                </div>
+                                                <div class="form-check mb-2">
+                                                    <input class="form-check-input" type="checkbox" name="serviciosExtra" value="puertasNevadientes" data-cost="120000">
+                                                    <label class="form-check-label">Desistalar / Instalar puertas nevecon (+$120.000)</label>
+                                                </div>
+                                                <div class="form-check mb-2 d-flex align-items-center flex-wrap">
+                                                    <input class="form-check-input" type="checkbox" name="serviciosExtra" value="TV" id="checkTV" data-cost="50000">
+                                                    <label class="form-check-label me-2" for="checkTV">Desistalar / Instalar TV (+$50.000 c/u)</label>
+                                                    <div id="cantidadTVContainer" style="display: none;">
+                                                        <input type="number" class="form-control form-control-sm" id="cantidadTV" name="cantidadTV" value="1" min="1" style="width: 75px; height: 30px; margin-left: 10px;">
+                                                    </div>
+                                                </div>
+                                                <div class="form-check mb-2">
+                                                    <input class="form-check-input" type="checkbox" name="serviciosExtra" value="subirBajarPeso" data-cost="150000">
+                                                    <label class="form-check-label">Subir / bajar peso por sogas (+$150.000)</label>
+                                                </div>
+                                            </div>
+                                    </div>
+                                    </div>
+
+                                    <hr class="my-4">
+
+                                    <!-- Complejidad y Urgencia -->
+                                    <div class="mb-4">
+                                        <h5 class="mb-3"><i class="fas fa-cogs me-2 imgQuote"></i> Complejidad y Urgencia</h5>
+                                        <div class="row">
+                                            <div class="col-md-6 mb-3">
+                                                <label class="form-label fw-semibold">Accesibilidad Origen</label>
+                                                <select class="form-select" name="accesoOrigen">
+                                                    <option value="facil" data-factor="1">Fácil acceso - Con ascensor</option>
+                                                    <option value="medio" data-factor="1.05">Acceso medio - Escaleras 1-3 pisos</option>
+                                                    <option value="dificil" data-factor="1.10">Difícil acceso - Escaleras 4+ pisos</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <label class="form-label fw-semibold">Accesibilidad Destino</label>
+                                                <select class="form-select" name="accesoDestino">
+                                                    <option value="facil" data-factor="1">Fácil acceso - Con ascensor</option>
+                                                    <option value="medio" data-factor="1.05">Acceso medio - Escaleras 1-3 pisos</option>
+                                                    <option value="dificil" data-factor="1.10">Difícil acceso - Escaleras 4+ pisos</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6 mb-3">
+                                                <label class="form-label fw-semibold">Urgencia del Servicio</label>
+                                                <select class="form-select" name="urgencia">
+                                                    <option value="programada" data-factor="1">Programada (7+ días)</option>
+                                                    <option value="normal" data-factor="1">Normal (3-7 días)</option>
+                                                    <option value="express" data-factor="1">Express (1-2 días)</option>
+                                                    <option value="inmediata" data-factor="1.01">Inmediata (hoy)</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <label class="form-label fw-semibold">Seguro</label>
+                                                <select class="form-select" name="seguro">
+                                                    <option value="basico" data-cost="0">Básico</option>
+                                                    <option value="premium" data-cost="80000">Premium (+$80.000)</option>
+                                                    <option value="completo" data-cost="150000">Cobertura completa (+$150.000)</option>
+                                                </select>
+                                            </div>
+                                    </div>
+                                    </div>
+
+                                    
+                                    <!-- Botón de Cálculo -->
+                                    <div class="text-center mt-4">
+                                        <button type="button" class="btn btn-primary" style="color: black;" id="calcular">
+                                            <i class="fas fa-calculator me-2"></i> Calcular Cotización
+                                        </button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
-                  </div>
 
-              </div>
-          </div>
-      </section>
+                    <!-- Resultado Panel -->
+                    <div class="col-lg-4">
+                        <div class="card shadow-lg border-0 sticky-top" id="resultadoPanel" style="top: 100px;">
+                            <div class="card-header text-white" style="background-color: black;">
+                                <h4 class="mb-0" style="color: white;"><i class="fas fa-file-invoice-dollar me-2 imgQuote"></i> Tu Cotización</h4>
+                            </div>
+                            <div class="card-body" id="cotizacionResultado">
+                                <div class="text-center py-4">
+                                    <i class="fas fa-calculator fa-3x text-muted mb-3"></i>
+                                    <p class="text-muted">Completa el formulario y haz clic en "Calcular Cotización" para obtener tu presupuesto personalizado</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-      <!--/ Call to action end -->
-      <section class="call-to-action-box no-padding py-5">
-        <div class="action-style-box">
-          <div class="row align-items-center">
-            <div class="col-md-8 text-center text-md-left">
-                <div class="call-to-action-text">
-                  <h3 class="action-title" style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ¿Estás interesado en los servicios que ofrecemos?</h3>
                 </div>
-            </div><!-- Col end -->
-            <div class="col-md-4 text-center text-md-right mt-3 mt-md-0">
-                <div class="call-to-action-btn">
-                  <a class="btn btn-dark" href="https://api.whatsapp.com/send/?phone=+573124092711&text=Hola+estoy+interesado+en+un+servicio+de+mudanza+...&type=phone_number&app_absent=0" target="_blank"><i class="fab fa-whatsapp"></i> Contactos Ahora</a>
+            </div>
+        </section>
+
+        <!--/ Call to action end -->
+        <section class="call-to-action-box no-padding py-5">
+            <div class="action-style-box">
+            <div class="row align-items-center">
+                <div class="col-md-8 text-center text-md-left">
+                    <div class="call-to-action-text">
+                    <h3 class="action-title" style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ¿Estás interesado en los servicios que ofrecemos?</h3>
+                    </div>
+                </div><!-- Col end -->
+                <div class="col-md-4 text-center text-md-right mt-3 mt-md-0">
+                    <div class="call-to-action-btn">
+                    <a class="btn btn-dark" href="https://api.whatsapp.com/send/?phone=+573124092711&text=Hola+estoy+interesado+en+un+servicio+de+mudanza+...&type=phone_number&app_absent=0" target="_blank"><i class="fab fa-whatsapp"></i> Contactos Ahora</a>
+                    </div>
+                </div><!-- col end -->
+            </div><!-- row end -->
+            </div><!-- Action style box -->
+        </section><!-- Action end -->
+
+        <section id="news" class="news">
+            <div class="container">
+            <div class="row text-center">
+                <div class="col-12">
+                    <h2 class="section-title"> </h2>
+                    <h3 class="section-sub-title">Nuestros servicios </h3>
                 </div>
-            </div><!-- col end -->
-          </div><!-- row end -->
-        </div><!-- Action style box -->
-      </section><!-- Action end -->
-      
-      <section id="news" class="news">
-        <div class="container">
-          <div class="row text-center">
-              <div class="col-12">
-                <h2 class="section-title"> </h2>
-                <h3 class="section-sub-title">Nuestros servicios </h3>
-              </div>
-          </div>
-          <!--/ Title row end -->
+            </div>
+            <!--/ Title row end -->
 
-          <div class="row">
-              <div class="col-lg-4 col-md-6 mb-4">
-                <div class="latest-post">
-                    <div class="latest-post-media">
-                      <a href="service-residential.html" class="latest-post-img">
-                          <img loading="lazy" class="img-fluid" src="images/services/service1.jpg" alt="img">
-                      </a>
-                    </div>
-                    <div class="post-body">
-                      <h4 class="post-title">
-                          <a href="service-residential.html" class="d-inline-block">Mudanzas Residenciales</a>
-                      </h4>
-                    </div>
-                </div><!-- Latest post end -->
-              </div><!-- 1st post col end -->
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="latest-post">
+                        <div class="latest-post-media">
+                        <a href="service-residential.html" class="latest-post-img">
+                            <img loading="lazy" class="img-fluid" src="images/services/service1.jpg" alt="img">
+                        </a>
+                        </div>
+                        <div class="post-body">
+                        <h4 class="post-title">
+                            <a href="service-residential.html" class="d-inline-block">Mudanzas Residenciales</a>
+                        </h4>
+                        </div>
+                    </div><!-- Latest post end -->
+                </div><!-- 1st post col end -->
 
-              <div class="col-lg-4 col-md-6 mb-4">
-                <div class="latest-post">
-                    <div class="latest-post-media">
-                      <a href="service-corporate.html" class="latest-post-img">
-                          <img loading="lazy" class="img-fluid" src="images/services/service2.jpg" alt="img">
-                      </a>
-                    </div>
-                    <div class="post-body">
-                      <h4 class="post-title">
-                          <a href="service-corporate.html" class="d-inline-block">Mudanzas Corporativas</a>
-                      </h4>
-                    </div>
-                </div><!-- Latest post end -->
-              </div><!-- 2nd post col end -->
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="latest-post">
+                        <div class="latest-post-media">
+                        <a href="service-corporate.html" class="latest-post-img">
+                            <img loading="lazy" class="img-fluid" src="images/services/service2.jpg" alt="img">
+                        </a>
+                        </div>
+                        <div class="post-body">
+                        <h4 class="post-title">
+                            <a href="service-corporate.html" class="d-inline-block">Mudanzas Corporativas</a>
+                        </h4>
+                        </div>
+                    </div><!-- Latest post end -->
+                </div><!-- 2nd post col end -->
 
-              <div class="col-lg-4 col-md-6 mb-4">
-                <div class="latest-post">
-                    <div class="latest-post-media">
-                      <a href="service-integral.html" class="latest-post-img">
-                          <img loading="lazy" class="img-fluid" src="images/services/service3.jpg" alt="img">
-                      </a>
-                    </div>
-                    <div class="post-body">
-                      <h4 class="post-title">
-                          <a href="service-integral.html" class="d-inline-block">Servicos Integrales</a>
-                      </h4>
-                    </div>
-                </div><!-- Latest post end -->
-              </div><!-- 3rd post col end -->
-          </div>
-          <!--/ Content row end -->
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="latest-post">
+                        <div class="latest-post-media">
+                        <a href="service-integral.html" class="latest-post-img">
+                            <img loading="lazy" class="img-fluid" src="images/services/service3.jpg" alt="img">
+                        </a>
+                        </div>
+                        <div class="post-body">
+                        <h4 class="post-title">
+                            <a href="service-integral.html" class="d-inline-block">Servicos Integrales</a>
+                        </h4>
+                        </div>
+                    </div><!-- Latest post end -->
+                </div><!-- 3rd post col end -->
+            </div>
+            <!--/ Content row end -->
 
-          <div class="general-btn text-center mt-4">
-              <a class="btn btn-primary" href="services.html">conoce más</a>
-          </div>
+            <div class="general-btn text-center mt-4">
+                <a class="btn btn-primary" href="services.html">conoce más</a>
+            </div>
 
-        </div>
-        <!--/ Container end -->
-      </section>
-      <!--/ News end -->
+            </div>
+            <!--/ Container end -->
+        </section>
+        <!--/ News end -->
 
-      <!-- Redes Sociales Fijas -->
-      <div id ="social-networks-container"></div>
+        <!-- Redes Sociales Fijas -->
+        <div id ="social-networks-container"></div>
 
-      <!-- Footer -->
-      <div id="footer-container"></div>
+        <!-- Footer -->
+        <div id="footer-container"></div>
 
-      <!-- initialize jQuery Library -->
-      <script src="plugins/jQuery/jquery.min.js"></script>
-      <!-- Bootstrap jQuery -->
-      <script src="plugins/bootstrap/bootstrap.min.js" defer></script>
-      <!-- Template custom -->
-      <script src="js/script.js"></script>
-      <!-- Load Components -->
-      <script src="js/load-components.js" defer></script>
-      <!-- Main JS -->
-      <script src="js/quote-calculator.js"></script>
+        <!-- initialize jQuery Library -->
+        <script src="plugins/jQuery/jquery.min.js"></script>
+        <!-- slick Carousel -->
+        <script src="plugins/slick/slick.min.js"></script>
+        <!-- Colorbox -->
+        <script src="plugins/colorbox/jquery.colorbox.js"></script>
+        <!-- Bootstrap jQuery -->
+        <script src="plugins/bootstrap/bootstrap.min.js" defer></script>
+        <!-- Template custom -->
+        <script src="js/script.js"></script>
+        <!-- Load Components -->
+        <script src="js/load-components.js" defer></script>
+        <!-- Main JS -->
+        <script src="js/quote-calculator.js"></script>
+
+        <script>
+            function onClick(e) {
+                e.preventDefault();
+                grecaptcha.enterprise.ready(async () => {
+                const token = await grecaptcha.enterprise.execute('6LfaPuErAAAAANTjR_shWort5WXuJgEys9mm8XPw', {action: 'LOGIN'});
+                });
+            }
+        </script>
+
+        <!-- Google Maps Autocomplete Script -->
+        
 </body>
 </html>
