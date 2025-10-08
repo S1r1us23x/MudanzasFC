@@ -3042,7 +3042,7 @@ label {
   text-align: center;
 }
 
-.post-social-icons a i.fa-facebook-f {
+.post-social-icons a i.fa-facebook {
   background: #41578a;
 }
 
@@ -3392,4 +3392,156 @@ label {
 .btn-primary:hover {
   background: #272d33;
   color: #ffb600 !important;
+}
+
+/*--------------------------------------------------------------
+# Floating Chat Widget
+--------------------------------------------------------------*/
+#chat-toggle-button {
+  position: fixed;
+  bottom: 20px;
+  /* Ajuste para no solaparse con la barra social */
+  left: 80px; 
+  width: 60px;
+  height: 60px;
+  background-color: var(--primary-color);
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  z-index: 999;
+  transition: transform 0.2s ease;
+}
+
+#chat-toggle-button:hover {
+  transform: scale(1.1);
+}
+
+#floating-chat-container {
+  position: fixed;
+  bottom: 90px;
+  /* Ajuste para no solaparse con la barra social */
+  left: 80px; 
+  width: 350px;
+  max-width: 90vw;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border-radius: 15px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  z-index: 1000;
+}
+
+.chat-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: var(--primary-color);
+  color: #fff;
+  /* Evita que el header se encoja */
+  flex-shrink: 0; 
+}
+
+.chat-header h5 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.chat-header .btn-close {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  color: #fff;
+  opacity: 0.8;
+}
+
+.chat-header .btn-close:hover {
+  opacity: 1;
+}
+
+.chat-container {
+  border: none;
+  box-shadow: none;
+  /* Permite que este contenedor crezca y ocupe el espacio restante */
+  flex-grow: 1; 
+  display: flex;
+  flex-direction: column;
+  /* Evita que el contenido interno se desborde */
+  overflow: hidden; 
+}
+
+.chat-window {
+  /* Permite que la ventana de mensajes crezca */
+  flex-grow: 1; 
+  padding: 15px;
+  overflow-y: auto;
+  /* Añadido para que los hijos (mensajes) se puedan alinear */
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.chat-window p {
+  margin: 0;
+  padding: 10px 15px;
+  border-radius: 18px;
+  max-width: 85%;
+  line-height: 1.5;
+  word-wrap: break-word;
+}
+
+.ai-message {
+  /* Alinea el contenedor del mensaje a la izquierda */
+  align-self: flex-start;
+}
+
+.ai-message p {
+  /* Color sombreado claro para el AI */
+  background-color: #f1f1f1;
+  color: #333;
+  border-bottom-left-radius: 4px;
+}
+
+.user-message {
+  /* Alinea el contenedor del mensaje a la derecha */
+  align-self: flex-end;
+}
+
+.user-message p {
+  /* Color primario para el usuario */
+  background-color: #fbe195;
+  color: #000;
+  border-bottom-right-radius: 4px;
+}
+
+.chat-input-form {
+  display: flex;
+  border-top: 1px solid #ddd;
+  /* Evita que el formulario se encoja */
+  flex-shrink: 0; 
+}
+
+.chat-input-form input {
+  border: none;
+  border-radius: 0;
+  flex-grow: 1;
+  padding: 15px;
+  box-shadow: none;
+}
+
+.chat-input-form input:focus {
+  box-shadow: none;
+}
+
+.chat-input-form button {
+  border-radius: 0;
+  border: none;
+  padding: 0 25px;
 }
