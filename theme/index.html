@@ -504,6 +504,34 @@
       </section>
       <!--/ News end -->
 
+      <!-- Floating Chat Widget -->
+      <div id="floating-chat-widget">
+        <!-- Botón para abrir/cerrar el chat -->
+        <div id="chat-toggle-button">
+          <i class="fas fa-comments"></i>
+        </div>
+
+        <!-- Contenedor del chat flotante (inicialmente oculto) -->
+        <div id="floating-chat-container" style="display: none;">
+          <div class="chat-header">
+            <h5>Asistente Virtual FC</h5>
+            <button id="chat-close-button" class="btn-close"></button>
+          </div>
+          <div class="chat-container">
+            <div class="chat-window" id="chat-window">
+              <div class="ai-message">
+                <p>¡Hola FC-bot! Soy tu asistente virtual de Mudanzas FC. Puedo ayudarte a cotizar tu mudanza, responder preguntas sobre nuestros servicios o informarte sobre nuestras políticas y mucho más. ¿En qué puedo ayudarte hoy?</p>
+              </div>
+            </div>
+            <form id="ai-chat-form" class="chat-input-form">
+              <input type="text" id="chat-input" class="form-control" placeholder="Escribe tu pregunta..." autocomplete="off">
+              <button type="submit" class="btn btn-primary"><i class="fas fa-paper-plane"></i></button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <!--/ Floating Chat Widget end -->
+
       <!-- Redes Sociales Fijas -->
       <div id ="social-networks-container"></div>
 
@@ -527,6 +555,8 @@
       <script src="plugins/google-map/map.js" defer></script>
       <!-- Template custom -->
       <script src="js/script.js"></script>
+      <!-- AI Agent -->
+      <script src="js/ai-agent.js"></script>
       <!-- Load Components -->
       <script src="js/load-components.js" defer></script>
 
