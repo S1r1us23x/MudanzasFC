@@ -38,28 +38,6 @@
     <link rel="stylesheet" href="css/style.css">
 
     <script src="https://www.google.com/recaptcha/enterprise.js?render=6LfaPuErAAAAANTjR_shWort5WXuJgEys9mm8XPw"></script>
-    
-    <!-- Google Maps Autocomplete Script -->
-    <script>
-        function initAutocomplete() {
-            const options = {
-                componentRestrictions: { country: "co" }, // Restringe la búsqueda a Colombia
-                fields: ["address_components", "geometry", "name"],
-                types: ["address"],
-            };
-
-            const origenInput = document.getElementById('ciudadOrigen');
-            const destinoInput = document.getElementById('ciudadDestino');
-
-            if (origenInput && destinoInput) {
-                new google.maps.places.Autocomplete(origenInput, options);
-                new google.maps.places.Autocomplete(destinoInput, options);
-            }
-        }
-    </script>
-    <!-- Google Maps Places API -->
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDh2RVp-A3ONHv6uLesQv9Y26DMAl1tvSk&libraries=places&callback=initAutocomplete"></script>
-
 </head>
 <body>
     <div class="body-inner">
@@ -132,9 +110,12 @@
                                                     <option value="">Selecciona el tipo</option>
                                                     <option value="local" data-factor="1">Local - Misma ciudad</option>
                                                     <option value="regional" data-factor="1.5">Regional - Entre ciudades cercanas</option>
-                                                    <option value="nacionalExpress" data-factor="2">Nacional (expreso) </option>
-                                                    <option value="nacionalCompartido" data-factor="1.5">Nacional (compartido) </option>
+                                                    <option value="nacionalExpress" data-factor="3.5">Nacional (expreso) </option>
+                                                    <option value="nacionalCompartido" data-factor="2">Nacional (compartido) </option>
                                                 </select>
+                                            </div>
+                                            <div id="aviso-distancia" class="form-text text-warning mt-2" style="display: none; font-size: 0.85rem; background-color: azure;">
+                                                <strong>Aviso:</strong> Esta simulación no considera la distancia ni el kilometraje. El monto mostrado se basa en el trabajo de cargue/descargue y puede incrementar según la distancia del servicio.
                                             </div>
                                         </div>
                                     </div>
@@ -183,7 +164,7 @@
                                                 <div class="col-md-4">
                                                     <div class="form-check">
                                                         <input class="form-check-input" type="checkbox" name="bienesEspeciales" value="electrodomesticos" data-cost="30000">
-                                                        <label class="form-check-label">Electrodomésticos grandes</label>
+                                                        <label class="form-check-label">Electrodomésticos/Muebles grandes</label>
                                                     </div>
                                                 </div>
                                             </div>
@@ -428,16 +409,51 @@
         <!-- Main JS -->
         <script src="js/quote-calculator.js"></script>
 
+        <!-- Google Maps Autocomplete Script -->
         <script>
-            function onClick(e) {
-                e.preventDefault();
-                grecaptcha.enterprise.ready(async () => {
-                const token = await grecaptcha.enterprise.execute('6LfaPuErAAAAANTjR_shWort5WXuJgEys9mm8XPw', {action: 'LOGIN'});
-                });
+            function initAutocomplete() {
+                const options = {
+                    componentRestrictions: { country: "co" }, // Restringe la búsqueda a Colombia
+                    fields: ["address_components", "geometry", "name"],
+                    types: ["address"],
+                };
+
+                const origenInput = document.getElementById('ciudadOrigen');
+                const destinoInput = document.getElementById('ciudadDestino');
+
+                if (origenInput && destinoInput) {
+                    new google.maps.places.Autocomplete(origenInput, options);
+                    new google.maps.places.Autocomplete(destinoInput, options);
+                }
             }
         </script>
+        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDh2RVp-A3ONHv6uLesQv9Y26DMAl1tvSk&libraries=places&callback=initAutocomplete"></script>
 
-        <!-- Google Maps Autocomplete Script -->
+        <script>
+            function setupEventListeners() {
+                // Botón de cálculo
+                $('#calcular').on('click', calcularCotizacion);
+            }
+
+            function initSmoothScroll() {
+                // Smooth scrolling
+                $('a.smooth-scroll').on('click', function(e) {
+                    e.preventDefault();
+
+                    const target = this.hash;
+                    const $target = $(target);
+
+                    $('html, body').animate({
+                        scrollTop: $target.offset().top
+                    }, 800, 'swing');
+                });
+            }
+
+            $(document).ready(function() {
+                setupEventListeners();
+                initSmoothScroll();
+            });
+        </script>
         
 </body>
 </html>

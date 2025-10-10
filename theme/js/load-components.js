@@ -52,6 +52,16 @@ document.addEventListener('DOMContentLoaded', () => {
         subtree: true
     });
 
+    $('select[name="tipoMudanza"]').on('change', function() {
+        const tipoSeleccionado = $(this).val();
+        const avisoDistancia = $('#aviso-distancia');
+
+        if (tipoSeleccionado === 'nacionalExpress' || tipoSeleccionado === 'nacionalCompartido') {
+            avisoDistancia.slideDown();
+        } else {
+            avisoDistancia.slideUp();
+        }
+    });
 
     loadComponent('header-container', '_header.html');
     loadComponent('social-networks-container', '_socialBar.html');
